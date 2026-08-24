@@ -30,7 +30,7 @@ def test_agent_card_is_machine_readable() -> None:
 
 def test_tasks_are_not_falsely_claimed_as_executed() -> None:
     response = client.post('/tasks', json={'objective': 'Review bootstrap security'})
-    assert response.status_code == 202
+    assert response.status_code == 503
     body = response.json()
     assert body['accepted'] is False
     assert body['state'] == 'bootstrap_not_ready'
