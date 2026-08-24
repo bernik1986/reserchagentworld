@@ -87,10 +87,11 @@ def agent_card() -> dict[str, Any]:
     }
 
 
-@app.post("/tasks", status_code=202)
+@app.post("/tasks", status_code=503)
 def accept_task(task: TaskRequest) -> dict[str, Any]:
     # Durable queueing is introduced in the next bootstrap milestone. Until
-    # then, accepting a task is explicit about being non-executing.
+    # then, the node exposes the request schema but explicitly reports that
+    # execution is unavailable.
     return {
         "accepted": False,
         "state": "bootstrap_not_ready",
